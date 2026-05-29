@@ -1,0 +1,110 @@
+/* ── Page Intro (centered text block) ──────────────────────────── */
+.pageIntro {
+  padding: 70px 40px 50px;
+  background: var(--brand-gradient);
+  text-align: center;
+  color: #fff;
+}
+.pageIntro h1,
+.pageIntro h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.pageIntro h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 16px;
+}
+.pageIntro p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.85;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* ── Alternating Section Row ───────────────────────────────────── */
+.sectionRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 64px;
+  padding: 72px 0;
+  border-bottom: 1px solid var(--border);
+}
+.sectionRow:last-child { border-bottom: none; }
+
+/* Dark section uses brand gradient instead of navy */
+.sectionRow.darkBg {
+  background: var(--brand-gradient);
+}
+.sectionRow.darkBg .textBlock h2 { color: #fff; }
+.sectionRow.darkBg .textBlock p  { color: rgba(255,255,255,0.88); }
+.sectionRow.darkBg .textBlock ul li { color: rgba(255,255,255,0.88); }
+
+.sectionRow.reversed { direction: rtl; }
+.sectionRow.reversed > * { direction: ltr; }
+
+/* ── Text Block ─────────────────────────────────────────────────── */
+.textBlock h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 18px;
+  line-height: 1.3;
+}
+.textBlock p {
+  font-size: 0.96rem;
+  color: var(--text-light);
+  line-height: 1.9;
+}
+.textBlock ul {
+  margin-top: 14px;
+  padding-left: 20px;
+}
+.textBlock ul li {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.85;
+  margin-bottom: 6px;
+}
+.textBlock ul li::marker { color: var(--primary); }
+
+/* ── Image Block ────────────────────────────────────────────────── */
+.imgBlock {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.imgBlock img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.imgBlock:hover img { transform: scale(1.04); }
+
+/* ── Section wrapper ────────────────────────────────────────────── */
+.sectionsWrap { background: #fff; }
+.sectionsWrap .container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .pageIntro { padding: 50px 20px 36px; }
+  .sectionRow {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 48px 0;
+  }
+  .sectionRow.reversed { direction: ltr; }
+  .sectionsWrap .container { padding: 0 20px; }
+  .imgBlock img { height: 220px; }
+}

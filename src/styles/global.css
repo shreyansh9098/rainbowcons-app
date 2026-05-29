@@ -1,0 +1,194 @@
+/* ── Reset & Base ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* RainbowCons Brand: orange → red gradient (from logo) */
+  --primary:        #e85d04;
+  --primary-dark:   #c20000;
+  --primary-light:  #fff3ec;
+  --accent:         #f8a000;
+  --accent-dark:    #e09c00;
+  --brand-gradient:     linear-gradient(135deg, #f8a000 0%, #e85d04 55%, #c20000 100%);
+  --brand-gradient-rev: linear-gradient(135deg, #c20000 0%, #e85d04 55%, #f8a000 100%);
+
+  --text:           #333333;
+  --text-light:     #666666;
+  --text-muted:     #999999;
+  --bg:             #ffffff;
+  --white:          #ffffff;
+  --border:         #f0e0d6;
+  --footer-bg:      #222222;
+  --footer-bottom:  #1f1f1f;
+  --header-h:       80px;
+  --shadow-sm:      0 2px 8px rgba(232,93,4,0.10);
+  --shadow-md:      0 4px 24px rgba(232,93,4,0.14);
+  --shadow-lg:      0 12px 40px rgba(232,93,4,0.20);
+  --radius-sm:      6px;
+  --radius-md:      10px;
+  --radius-lg:      16px;
+  --transition:     0.2s ease;
+}
+
+/* ── Hide Divi's broken icon-font pseudo-elements ──────────────────────
+   The ETmodules icon font fails to load cross-origin, so the codepoints
+   render as raw "3" / "U". We hide the pseudo-elements and inject real
+   icons inline via JSX instead. */
+#et_search_icon::before,
+#top-menu li.menu-item-has-children > a::after,
+.et_mobile_menu li.menu-item-has-children > a::after,
+.et-menu li.menu-item-has-children > a::after,
+.et_pb_menu .menu-item-has-children > a::after,
+.mobile_menu_bar::before,
+.et_close_search_field::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Inline icon helpers */
+.rc-chevron {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.6em;
+  vertical-align: middle;
+  transition: transform 0.2s ease;
+}
+#top-menu li.menu-item-has-children:hover .rc-chevron { transform: rotate(180deg); }
+
+.rc-search-icon { display: inline-flex; align-items: center; justify-content: center; }
+.rc-search-icon svg { stroke: currentColor; }
+
+.rc-close-icon::after {
+  content: '✕';
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* ── Brand color overrides (Divi default blue → red/orange) ─────────── */
+#top-menu a:hover,
+#top-menu li.current-menu-item > a,
+#top-menu li.current-menu-ancestor > a,
+#top-menu li li.current-menu-item > a,
+.et_mobile_menu li a:hover,
+.et_pb_menu .et-menu li a:hover,
+#et_search_icon:hover::before,
+#et_search_icon.et_pb_is_active::before,
+.et_pb_button:hover {
+  color: var(--primary) !important;
+}
+
+.et_pb_button {
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+.et_pb_button:hover {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}
+
+a { color: var(--primary); }
+
+/* ── Search bar slide animation ─────────────────────────────────────── */
+.et_search_outer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+#main-header.et-search-open .et_search_outer {
+  max-height: 100px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Open Sans', Arial, 'Poppins', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  line-height: 1.7em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+  line-height: 1em;
+  font-family: inherit;
+}
+
+img    { max-width: 100%; max-height: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+a      { text-decoration: none; color: inherit; }
+
+/* ── Utility ────────────────────────────────────────────────────────── */
+.text-primary { color: var(--primary) !important; }
+.text-accent  { color: var(--accent)  !important; }
+.text-center  { text-align: center; }
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Divi-style entrance animations ─────────────────────────────────── */
+/* duration 1000ms, ease-in-out, starting opacity 0%, intensities mirror Divi */
+@keyframes slideTop {           /* intensity 2% — very subtle */
+  from { opacity: 0; transform: translateY(-2vh); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideBottom {        /* intensity 10% */
+  from { opacity: 0; transform: translateY(10vh); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes zoom {               /* intensity 6% — subtle scale */
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes zoomLeft {           /* intensity 20% — bigger lateral slide */
+  from { opacity: 0; transform: translateX(-20%) scale(0.92); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes zoomRight {          /* intensity 20% */
+  from { opacity: 0; transform: translateX(20%) scale(0.92); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes zoomBottom {         /* intensity 6%, starting_opacity 100% — movement only */
+  from { opacity: 1; transform: translateY(6%) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.anim-slide-top    { animation: slideTop    1000ms ease-in-out both; }
+.anim-slide-bottom { animation: slideBottom 1000ms ease-in-out both; }
+.anim-zoom         { animation: zoom        1000ms ease-in-out both; }
+.anim-zoom-left    { animation: zoomLeft    1000ms ease-in-out both; }
+.anim-zoom-right   { animation: zoomRight   1000ms ease-in-out both; }
+.anim-zoom-bottom  { animation: zoomBottom  1000ms ease-in-out both; }
+
+.animate-fade-up { animation: fadeInUp 0.6s ease both; }
+.animate-fade    { animation: fadeIn   0.4s ease both; }
+.animate-scale   { animation: scaleIn  0.3s ease both; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+}

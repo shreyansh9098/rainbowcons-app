@@ -96,7 +96,7 @@ export default function ContactPage({ content }) {
             <address>
               {phone && <>📞 <a href={`tel:${phone.replace(/\s/g,'')}`}>{phone}</a><br /></>}
               {email && <>✉️ <a href={`mailto:${email}`}>{email}</a></>}
-              {!phone && !email && 'connect@consster.com'}
+              {!phone && !email && 'engage@rainbowcons.com'}
             </address>
           </div>
         </div>

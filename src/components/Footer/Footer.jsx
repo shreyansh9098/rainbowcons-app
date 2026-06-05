@@ -49,7 +49,7 @@ export default function Footer({ pages, onNavigate }) {
                       style={{ width: 18, height: 18 }}
                       alt=""
                     />{' '}
-                    Email: connect@consster.com
+                    Email: engage@rainbowcons.com
                   </address>
                   <address></address>
                 </div>
